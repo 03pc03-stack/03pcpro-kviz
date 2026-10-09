@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Что с компьютером? — Честный компьютерный мастер</title>
+<meta name="description" content="4 вопроса — и вы узнаете примерную цену ремонта компьютера и когда мастер сможет приехать. Одинцово, запад и юго-запад Москвы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --ink:#1a211d; --muted:#5d6760; --line:#dde2dc;
+  --accent:#0e7a52; --accent-ink:#ffffff; --accent-soft:#e3f1ea; --sticker:#ff9f1c; --sticker-ink:#1a211d;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1512; --surface:#17201b; --ink:#e6ede8; --muted:#9aa89f; --line:#2a362f;
+  --accent:#4fd1a0; --accent-ink:#0f1512; --accent-soft:#1b2e25; --sticker:#ffad3b; --sticker-ink:#1a211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1512; --surface:#17201b; --ink:#e6ede8; --muted:#9aa89f; --line:#2a362f;
+  --accent:#4fd1a0; --accent-ink:#0f1512; --accent-soft:#1b2e25; --sticker:#ffad3b; --sticker-ink:#1a211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+.top-in{max-width:620px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font:700 14px/1.2 var(--f-display);color:var(--ink);text-decoration:none}
+.brand small{display:block;font:400 12px/1.3 var(--f-body);color:var(--muted)}
+.top-phone{font:500 15px/1 var(--f-mono);color:var(--ink);text-decoration:none;white-space:nowrap}
+
+main{max-width:620px;margin:0 auto;padding:24px 16px 48px}
+.screen{display:none}
+.screen.on{display:block;animation:in .32s ease both}
+.screen.back{animation:inBack .32s ease both}
+@keyframes in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes inBack{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.screen.on,.screen.back{animation:none}}
+
+.eyebrow{font:500 12px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 clamp(24px,6vw,32px)/1.18 var(--f-display);margin:10px 0 0;text-wrap:balance}
+h2{font:700 clamp(21px,5vw,26px)/1.22 var(--f-display);margin:6px 0 0;text-wrap:balance}
+.lead{color:var(--muted);margin:12px 0 0}
+.hint{color:var(--muted);font-size:15px;margin:8px 0 0}
+
+.master{display:flex;align-items:center;gap:12px;margin-top:20px}
+.master img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.master b{display:block;font-weight:600}
+.master span{color:var(--muted);font-size:15px}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:14px 20px;border-radius:12px;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:600 17px/1.2 var(--f-body);text-decoration:none;cursor:pointer;transition:transform .12s,filter .12s}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:scale(.99)}
+.btn-ghost{background:transparent;color:var(--accent)}
+.btn-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.btn-row .btn{min-height:48px;font-size:15px;padding:10px 8px}
+.start-btn{margin-top:26px}
+.free{text-align:center;color:var(--muted);font-size:14px;margin-top:12px}
+
+/* progress */
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.prog-bar{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.prog-bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s ease}
+.prog-n{font:500 13px/1 var(--f-mono);color:var(--muted);white-space:nowrap}
+.back-btn{background:none;border:0;color:var(--muted);padding:6px 0;margin:0 0 6px;cursor:pointer;font-size:15px}
+.back-btn:hover{color:var(--ink)}
+
+/* options */
+.opts{display:grid;gap:10px;margin-top:20px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:15px 16px;min-height:62px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+.opt:hover{border-color:var(--accent)}
+.opt:active{transform:scale(.99)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt .ic{font-size:24px;line-height:1;flex:none;width:30px;text-align:center}
+.opt b{display:block;font-weight:600;font-size:17px;line-height:1.3}
+.opt small{display:block;color:var(--muted);font-size:14.5px;line-height:1.35;margin-top:2px}
+
+/* result */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.card.when{grid-column:1/-1}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.card .k{font-size:13.5px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.card .v{font-weight:600;font-size:16.5px;line-height:1.3;margin-top:6px}
+.card.price .v{font:700 18px/1.25 var(--f-display)}
+.note{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:15.5px}
+.guar{margin-top:16px;padding:16px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.guar ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.guar li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px}
+.guar li::before{content:"✓";color:var(--accent);font-weight:700;flex:none}
+.cta{margin-top:20px}
+.cta-sub{text-align:center;color:var(--muted);font-size:14px;margin:8px 0 0}
+.again{display:block;margin:18px auto 0;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:15px}
+
+/* sent */
+.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.steps li::before{counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sticker);color:var(--sticker-ink);font-weight:700}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:15px}
+.fallback{margin-top:22px}
+.fallback p{margin:0 0 8px;font-weight:600}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+@media (max-width:520px){
+  .cards{grid-template-columns:1fr}
+  .card{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .card .v{margin-top:0;text-align:right}
+  .card.when{display:block}
+  .card.when .v{text-align:left;margin-top:6px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="https://03pcpro.ru/">Честный компьютерный мастер<small>Дмитрий Соловьев · Одинцово и запад Москвы</small></a>
+    <a class="top-phone" href="tel:+79161032882">8 916 103-28-82</a>
+  </div>
+</header>
+
+<main>
+  <!-- Экран 0: старт -->
+  <section class="screen on" id="s-start">
+    <span class="eyebrow">Что с компьютером?</span>
+    <h1>Расскажите, что случилось, — я сразу скажу, сколько это примерно стоит</h1>
+    <p class="lead">4 простых вопроса, меньше минуты. Не нужно звонить и объяснять — в конце напишете мне одной кнопкой, а я отвечу, когда смогу приехать.</p>
+    <div class="master">
+      <img src="avatar.jpg" alt="Дмитрий Соловьев" width="52" height="52">
+      <div><b>Дмитрий Соловьев</b><span>компьютерный мастер · приезжаю сам</span></div>
+    </div>
+    <button class="btn start-btn" type="button" data-go="1">Начать →</button>
+    <p class="free">Ничего не нужно платить и ни на что не нужно подписываться</p>
+  </section>
+
+  <!-- Экран 1: вопросы (заполняется скриптом) -->
+  <section class="screen" id="s-q" aria-live="polite">
+    <button class="back-btn" type="button" id="backBtn">← Назад</button>
+    <div class="prog"><div class="prog-bar"><i id="progFill"></i></div><span class="prog-n" id="progN">Вопрос 1 из 4</span></div>
+    <h2 id="qTitle"></h2>
+    <p class="hint" id="qHint"></p>
+    <div class="opts" id="qOpts"></div>
+  </section>
+
+  <!-- Экран 2: результат -->
+  <section class="screen" id="s-result">
+    <span class="eyebrow">Ваш результат</span>
+    <h2 id="rTitle"></h2>
+    <p class="lead" id="rCause"></p>
+    <div class="cards">
+      <div class="card price"><span class="k">💰 Обычно стоит</span><span class="v" id="rPrice"></span></div>
+      <div class="card"><span class="k">⏱ Занимает</span><span class="v" id="rTime"></span></div>
+      <div class="card when"><span class="k">🚗 Когда приеду</span><span class="v" id="rWhen"></span></div>
+    </div>
+    <p class="note" id="rNote" hidden>Везти никуда не нужно — разберусь на месте.</p>
+    <div class="guar">
+      <ul>
+        <li>Выезд по Одинцово и Москве — бесплатно</li>
+        <li>Точную цену назову до начала работы — без вашего согласия ничего не делаю</li>
+        <li>Нет результата — нет оплаты</li>
+      </ul>
+    </div>
+    <div class="cta">
+      <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener">Написать Дмитрию в WhatsApp</a>
+      <p class="cta-sub">Сообщение уже готово — останется нажать «Отправить»</p>
+      <div class="btn-row">
+        <a class="btn btn-ghost" href="https://t.me/xandertorr" target="_blank" rel="noopener" data-copy>Telegram</a>
+        <a class="btn btn-ghost" href="https://max.ru/u/f9LHodD0cOJ-yu_jrzXJkgIwLgfpXLJ7c3KRkQ8mF5lQi-DMuosyxSqnv2Y" target="_blank" rel="noopener" data-copy>MAX</a>
+        <a class="btn btn-ghost" href="tel:+79161032882">Позвонить</a>
+      </div>
+    </div>
+    <button class="again" type="button" id="againBtn">← Пройти заново</button>
+  </section>
+
+  <!-- Экран 3: после нажатия -->
+  <section class="screen" id="s-sent">
+    <span class="eyebrow">Почти готово</span>
+    <h2>Отлично, осталось нажать «Отправить» 👍</h2>
+    <p class="lead">В WhatsApp уже открыто готовое сообщение. Допишите адрес или пару слов о проблеме — и отправьте.</p>
+    <ol class="steps">
+      <li><div><b>Я отвечу</b><span>обычно в течение 15 минут, с 10:00 до 22:00</span></div></li>
+      <li><div><b>Задам 1–2 уточняющих вопроса</b><span>и назову точную вилку цены</span></div></li>
+      <li><div><b>Договоримся о времени</b><span>приеду и сделаю при вас</span></div></li>
+    </ol>
+    <div class="fallback">
+      <p>Не открылся WhatsApp?</p>
+      <button class="btn" type="button" id="copyBtn">Скопировать текст сообщения</button>
+      <div class="btn-row">
+        <a class="btn btn-ghost" href="https://t.me/xandertorr" target="_blank" rel="noopener" data-copy>Telegram</a>
+        <a class="btn btn-ghost" href="https://max.ru/u/f9LHodD0cOJ-yu_jrzXJkgIwLgfpXLJ7c3KRkQ8mF5lQi-DMuosyxSqnv2Y" target="_blank" rel="noopener" data-copy>MAX</a>
+        <a class="btn btn-ghost" href="tel:+79161032882">Позвонить</a>
+      </div>
+    </div>
+    <p class="hint" style="margin-top:20px">Если решите, что приезжать не нужно, — тоже напишите. Подскажу бесплатно, что можно сделать самому.</p>
+    <button class="again" type="button" id="againBtn2">← Пройти заново</button>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const PHONE = "79161032882";
+
+const QUESTIONS = [
+  { key:"problem", title:"Что случилось?", hint:"Выберите то, что ближе всего. Если не уверены — не страшно, разберусь на месте.", opts:[
+    {id:"off",ic:"🔌",t:"Не включается",s:"нажимаю кнопку — и ничего"},
+    {id:"slow",ic:"🐢",t:"Медленно работает",s:"долго включается, всё зависает"},
+    {id:"virus",ic:"🦠",t:"Странная реклама, вирусы",s:"выскакивают окна, открываются сайты"},
+    {id:"windows",ic:"🪟",t:"Переставить или обновить Windows",s:"в том числе с 10 на 11"},
+    {id:"hot",ic:"🔥",t:"Греется и шумит",s:"гудит, горячий, сам выключается"},
+    {id:"net",ic:"📶",t:"Не работает интернет или принтер",s:""},
+    {id:"other",ic:"💬",t:"Другое",s:"опишу своими словами"}]},
+  { key:"device", title:"Что за техника?", hint:"", opts:[
+    {id:"laptop",ic:"💻",t:"Ноутбук",s:""},
+    {id:"desktop",ic:"🖥",t:"Системный блок",s:"большой «ящик» под столом"},
+    {id:"aio",ic:"🖥",t:"Моноблок",s:"экран и компьютер в одном корпусе"},
+    {id:"printer",ic:"🖨",t:"Принтер или роутер",s:""}]},
+  { key:"area", title:"Где вы находитесь?", hint:"Я приезжаю сам — так пойму, когда смогу быть у вас.", opts:[
+    {id:"odin",ic:"📍",t:"Одинцово или рядом",s:"Одинцовский округ"},
+    {id:"zao",ic:"📍",t:"Запад Москвы",s:"Кунцево, Крылатское, Фили, Можайский"},
+    {id:"uzao",ic:"📍",t:"Юго-запад Москвы",s:"Солнцево, Раменки, Тропарёво, Ново-Переделкино"},
+    {id:"other",ic:"📍",t:"Другой район",s:"напишите — договоримся"}]},
+  { key:"when", title:"Когда нужна помощь?", hint:"", opts:[
+    {id:"now",ic:"⚡",t:"Срочно, сегодня",s:"компьютер нужен прямо сейчас"},
+    {id:"days",ic:"📅",t:"В ближайшие дни",s:""},
+    {id:"advice",ic:"💬",t:"Не срочно",s:"хочу просто посоветоваться"}]}
+];
+
+const PROBLEMS = {
+  off:    {name:"не включается", cause:"Чаще всего — блок питания, кнопка или диск. Найду причину на месте.", price:"1 000 – 4 500 ₽ + деталь, если нужна", time:"1–2 часа"},
+  slow:   {name:"медленно работает", cause:"Мусор и лишние программы в системе или старый жёсткий диск. Иногда сильно помогает замена на SSD.", price:"900 – 3 500 ₽ (SSD отдельно)", time:"1–2 часа"},
+  virus:  {name:"реклама и вирусы", cause:"Вредоносные программы и расширения в браузере. Удалю и поставлю защиту.", price:"900 – 2 500 ₽", time:"около 1 часа"},
+  windows:{name:"нужно переставить или обновить Windows", cause:"Установка или переход на Windows 11 с сохранением файлов и программ.", price:"900 – 3 000 ₽", time:"1–2 часа"},
+  hot:    {name:"греется и шумит", cause:"Пыль внутри и высохшая термопаста. Почищу и заменю.", price:"1 500 – 3 500 ₽", time:"1–2 часа"},
+  net:    {name:"не работает интернет или принтер", cause:"Настройки роутера, драйверы или подключение.", price:"900 – 2 000 ₽", time:"30–60 минут"},
+  other:  {name:"другая проблема", cause:"Опишите в сообщении пару слов — назову цену точнее.", price:"от 900 ₽", time:"зависит от задачи"}
+};
+const DEVICE_NAME = {laptop:"Ноутбук", desktop:"Системный блок", aio:"Моноблок", printer:"Принтер или роутер"};
+const AREA_NAME = {odin:"Одинцово", zao:"запад Москвы", uzao:"юго-запад Москвы", other:"другой район"};
+const WHEN_NAME = {now:"срочно, сегодня", days:"в ближайшие дни", advice:"не срочно, хочу посоветоваться"};
+
+const answers = {};
+let step = 0; // 0..3 — индекс вопроса
+
+const $ = s => document.querySelector(s);
+function show(id, back){
+  document.querySelectorAll(".screen").forEach(el => el.classList.remove("on","back"));
+  const el = $(id);
+  el.classList.add("on"); if (back) el.classList.add("back");
+  window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+}
+
+function renderQuestion(back){
+  const q = QUESTIONS[step];
+  $("#qTitle").textContent = q.title;
+  $("#qHint").textContent = q.hint || "Нажмите на подходящий ответ";
+  $("#progN").textContent = `Вопрос ${step+1} из ${QUESTIONS.length}`;
+  $("#progFill").style.width = `${(step)/QUESTIONS.length*100}%`;
+  requestAnimationFrame(()=> $("#progFill").style.width = `${(step+1)/QUESTIONS.length*100}%`);
+  const box = $("#qOpts"); box.innerHTML = "";
+  q.opts.forEach(o => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt" + (answers[q.key]===o.id ? " sel" : "");
+    b.innerHTML = `<span class="ic" aria-hidden="true">${o.ic}</span><span><b>${o.t}</b>${o.s?`<small>${o.s}</small>`:""}</span>`;
+    b.addEventListener("click", () => choose(q.key, o.id, b));
+    box.appendChild(b);
+  });
+  show("#s-q", back);
+}
+
+function choose(key, id, btn){
+  answers[key] = id;
+  btn.classList.add("sel");
+  setTimeout(() => {
+    if (step < QUESTIONS.length-1){ step++; renderQuestion(); }
+    else { renderResult(); }
+  }, 180);
+}
+
+function whenText(){
+  const a = answers.area, w = answers.when;
+  const h = new Date().getHours();
+  if (w === "now"){
+    if (h >= 20 || h < 10) return "Сейчас уже поздно — смогу завтра с 10:00. Напишите сейчас, чтобы занять утреннее время";
+    if (a === "odin") return "Обычно могу приехать в течение 1–3 часов";
+    if (a === "zao" || a === "uzao") return "Обычно сегодня, в течение 2–4 часов";
+    return "Напишите адрес — скажу, смогу ли сегодня";
+  }
+  if (w === "days") return "Договоримся на удобный день и время — с 10:00 до 22:00" + (a === "other" ? "; уточню возможность выезда" : "");
+  return "Можно начать с бесплатной консультации в WhatsApp — возможно, приезжать не придётся";
+}
+
+function problemData(){
+  let p = answers.problem;
+  if (answers.device === "printer" && (p === "off" || p === "slow")) p = "net";
+  return PROBLEMS[p];
+}
+
+function message(){
+  const p = PROBLEMS[answers.problem];
+  return [
+    "Здравствуйте, Дмитрий! Прошёл(ла) квиз на сайте.",
+    `Что случилось: ${p.name}`,
+    `Техника: ${DEVICE_NAME[answers.device].toLowerCase()}`,
+    `Район: ${AREA_NAME[answers.area]}`,
+    `Когда нужно: ${WHEN_NAME[answers.when]}`,
+    "Мой адрес / подробности: "
+  ].join("\n");
+}
+
+function renderResult(){
+  const p = problemData();
+  $("#rTitle").textContent = `${DEVICE_NAME[answers.device]}: ${PROBLEMS[answers.problem].name} — это обычно решается`;
+  $("#rCause").textContent = p.cause;
+  $("#rPrice").textContent = p.price;
+  $("#rTime").textContent = p.time;
+  $("#rWhen").textContent = whenText();
+  $("#rNote").hidden = !(answers.device === "desktop" || answers.device === "aio");
+  const wa = $("#waBtn");
+  wa.textContent = answers.when === "advice" ? "Задать вопрос бесплатно в WhatsApp" : "Написать Дмитрию в WhatsApp";
+  wa.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message())}`;
+  $("#progFill").style.width = "100%";
+  show("#s-result");
+}
+
+function toast(t){
+  const el = $("#toast"); el.textContent = t; el.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(()=>el.classList.remove("show"), 2600);
+}
+async function copyMsg(){
+  try { await navigator.clipboard.writeText(message()); return true; }
+  catch(e){
+    const ta = document.createElement("textarea"); ta.value = message(); document.body.appendChild(ta);
+    ta.select(); let ok=false; try{ ok = document.execCommand("copy"); }catch(_){} ta.remove(); return ok;
+  }
+}
+
+function restart(){
+  for (const k in answers) delete answers[k];
+  step = 0; show("#s-start", true);
+}
+
+document.querySelector("[data-go]").addEventListener("click", () => { step = 0; renderQuestion(); });
+$("#backBtn").addEventListener("click", () => {
+  if (step === 0) show("#s-start", true);
+  else { step--; renderQuestion(true); }
+});
+$("#waBtn").addEventListener("click", () => setTimeout(() => show("#s-sent"), 400));
+$("#againBtn").addEventListener("click", restart);
+$("#againBtn2").addEventListener("click", restart);
+$("#copyBtn").addEventListener("click", async () => {
+  toast(await copyMsg() ? "Текст скопирован — вставьте его в чат" : "Не получилось скопировать — напишите своими словами");
+});
+document.querySelectorAll("[data-copy]").forEach(a => a.addEventListener("click", async () => {
+  if (await copyMsg()) toast("Текст скопирован — вставьте его в чат");
+}));
+</script>
+</body>
+</html>
